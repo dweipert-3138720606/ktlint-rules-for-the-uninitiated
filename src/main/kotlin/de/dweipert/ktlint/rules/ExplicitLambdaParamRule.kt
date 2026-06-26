@@ -1,4 +1,4 @@
-package net.minecraft_community.ktlint.rules
+package de.dweipert.ktlint.rules
 
 import com.pinterest.ktlint.rule.engine.core.api.Rule
 import com.pinterest.ktlint.rule.engine.core.api.RuleId

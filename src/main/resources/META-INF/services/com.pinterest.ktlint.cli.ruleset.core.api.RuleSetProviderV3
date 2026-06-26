@@ -1,1 +1,1 @@
-net.minecraft_community.ktlint.CustomRuleSetProvider
+de.dweipert.ktlint.CustomRuleSetProvider

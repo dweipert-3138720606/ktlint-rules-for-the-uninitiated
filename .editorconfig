@@ -1,5 +1,4 @@
 [*]
-ktlint_standard_package-name = disabled
 ktlint_uninitiated_explicit-lambda-param = enabled
 ktlint_uninitiated_parentheses-before-trailing-lambda = enabled
 ktlint_uninitiated_if-brace = enabled
