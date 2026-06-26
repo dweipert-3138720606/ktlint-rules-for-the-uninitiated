@@ -64,15 +64,6 @@ class IfMultilineRuleTest {
     }
 
     @Test
-    fun `should flag single-line else-if with braces`() {
-        assertThat("fun f() { if (x) { a() } else if (y) { b() } }")
-            .hasLintViolations(
-                LintViolation(1, 11, "If statement must be multiline", false),
-                LintViolation(1, 31, "If statement must be multiline", false),
-            )
-    }
-
-    @Test
     fun `should not flag multiline else-if with braces`() {
         val code =
             """
@@ -86,5 +77,32 @@ class IfMultilineRuleTest {
             """.trimIndent()
         assertThat(code)
             .hasNoLintViolations()
+    }
+
+    @Test
+    fun `should not flag inline if in variable assignment`() {
+        assertThat("fun f() { val x = if (b) \"a\" else \"b\" }")
+            .hasNoLintViolations()
+    }
+
+    @Test
+    fun `should not flag inline if in return expression`() {
+        assertThat("fun f() = if (b) \"a\" else \"b\"")
+            .hasNoLintViolations()
+    }
+
+    @Test
+    fun `should not flag inline if as function argument`() {
+        assertThat("fun f() { foo(if (b) \"a\" else \"b\") }")
+            .hasNoLintViolations()
+    }
+
+    @Test
+    fun `should still flag else-if chain`() {
+        assertThat("fun f() { if (x) { a() } else if (y) { b() } }")
+            .hasLintViolations(
+                LintViolation(1, 11, "If statement must be multiline", false),
+                LintViolation(1, 31, "If statement must be multiline", false),
+            )
     }
 }

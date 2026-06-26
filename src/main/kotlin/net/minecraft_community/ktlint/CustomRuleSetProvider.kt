@@ -14,9 +14,9 @@ class CustomRuleSetProvider : RuleSetProviderV3(RuleSetId("uninitiated")) {
     override fun getRuleProviders(): Set<RuleProvider> =
         setOf(
             RuleProvider({ ExplicitLambdaParamRule() }),
-            RuleProvider({ ParenthesesBeforeTrailingLambdaRule() }),
             RuleProvider({ IfBraceRule() }),
             RuleProvider({ IfMultilineRule() }),
+            RuleProvider({ ParenthesesBeforeTrailingLambdaRule() }),
             RuleProvider({ BlankLineBeforeReturnRule() }),
             RuleProvider({ VariableNameLengthRule() }),
         )

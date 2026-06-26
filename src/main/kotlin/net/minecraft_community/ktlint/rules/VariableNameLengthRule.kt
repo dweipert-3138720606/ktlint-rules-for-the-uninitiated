@@ -14,7 +14,7 @@ val MIN_VARIABLE_NAME_LENGTH_PROPERTY: EditorConfigProperty<Int> =
     run({
         val type =
             PropertyType(
-                "uninitiated_min_variable_name_length",
+                "ktlint_uninitiated_min_variable_name_length",
                 "Minimum variable name length",
                 PropertyType.PropertyValueParser.POSITIVE_INT_VALUE_PARSER,
             )
@@ -38,7 +38,7 @@ val MIN_VARIABLE_NAME_LENGTH_PROPERTY: EditorConfigProperty<Int> =
                 }
             },
             propertyWriter = { value -> value.toString() },
-            name = "uninitiated_min_variable_name_length",
+            name = "ktlint_uninitiated_min_variable_name_length",
         )
     })
 
@@ -46,7 +46,7 @@ val SKIP_VARIABLE_NAMES_PROPERTY: EditorConfigProperty<String> =
     run({
         val type =
             PropertyType(
-                "uninitiated_min_variable_name_skip_names",
+                "ktlint_uninitiated_min_variable_name_skip_names",
                 "Variable names to skip",
                 PropertyType.PropertyValueParser.IDENTITY_VALUE_PARSER,
             )
@@ -65,7 +65,7 @@ val SKIP_VARIABLE_NAMES_PROPERTY: EditorConfigProperty<String> =
                 }
             },
             propertyWriter = { value -> value },
-            name = "uninitiated_min_variable_name_skip_names",
+            name = "ktlint_uninitiated_min_variable_name_skip_names",
         )
     })
 

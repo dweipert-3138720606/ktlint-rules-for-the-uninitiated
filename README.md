@@ -102,6 +102,15 @@ if (x) {
 }
 ```
 
+Also fine — these are in expression context, not statement context, so they are skipped:
+
+```kotlin
+val x = if (bool) "yes" else "no"
+fun f() = if (bool) "yes" else "no"
+return if (bool) "yes" else "no"
+foo(if (bool) "yes" else "no")
+```
+
 ---
 
 ### 5. `blank-line-before-return`

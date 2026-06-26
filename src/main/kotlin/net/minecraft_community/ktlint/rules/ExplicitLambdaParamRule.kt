@@ -34,18 +34,21 @@ class ExplicitLambdaParamRule :
     private fun bodyUsesImplicitIt(body: KtBlockExpression): Boolean {
         val refs = PsiTreeUtil.collectElementsOfType(body, KtNameReferenceExpression::class.java)
 
-        return refs.any({ ref ->
+        outer@ for (ref in refs) {
             if (ref.getReferencedName() != "it") {
-                return@any false
+                continue@outer
             }
             var parent = ref.parent
             while (parent != null && parent != body) {
                 if (parent is KtLambdaExpression) {
-                    return@any false
+                    continue@outer
                 }
                 parent = parent.parent
             }
-            true
-        })
+
+            return true
+        }
+
+        return false
     }
 }
