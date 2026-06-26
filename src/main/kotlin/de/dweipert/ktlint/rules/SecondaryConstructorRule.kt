@@ -60,14 +60,24 @@ class SecondaryConstructorRule :
         autoCorrect: Boolean,
         emit: (offset: Int, errorMessage: String, canAutoCorrect: Boolean) -> Unit,
     ) {
-        if (node.psi !is KtClass) return
+        if (node.psi !is KtClass) {
+            return
+        }
         val klass = node.psi as KtClass
 
-        if (klass.isInterface() || klass.isAnnotation() || klass.isData() || klass.isValue()) return
-        if (skipEnums && klass.isEnum()) return
-        if (klass.getPrimaryConstructorParameters().isEmpty()) return
+        if (klass.isInterface() || klass.isAnnotation() || klass.isData() || klass.isValue()) {
+            return
+        }
+        if (skipEnums && klass.isEnum()) {
+            return
+        }
+        if (klass.getPrimaryConstructorParameters().isEmpty()) {
+            return
+        }
 
-        if (referencesInitBlock(klass)) return
+        if (referencesInitBlock(klass)) {
+            return
+        }
 
         val paramList = klass.getPrimaryConstructorParameterList() ?: return
         emit(
@@ -81,23 +91,34 @@ class SecondaryConstructorRule :
         val names =
             klass
                 .getPrimaryConstructorParameters()
-                .filter { it.hasValOrVar() }
-                .mapNotNull { it.name }
+                .filter({ param -> param.hasValOrVar() })
+                .mapNotNull({ param -> param.name })
                 .toSet()
-        if (names.isEmpty()) return false
-        for (init in klass.getAnonymousInitializers()) {
-            if (containsReference(init, names)) return true
+        if (names.isEmpty()) {
+            return false
         }
+        for (init in klass.getAnonymousInitializers()) {
+            if (containsReference(init, names)) {
+                return true
+            }
+        }
+
         return false
     }
 
-    private fun containsReference(psi: PsiElement, names: Set<String>): Boolean {
+    private fun containsReference(
+        psi: PsiElement,
+        names: Set<String>,
+    ): Boolean {
         if (psi is KtNameReferenceExpression && psi.getReferencedName() in names) {
             return true
         }
         for (child in psi.children) {
-            if (containsReference(child, names)) return true
+            if (containsReference(child, names)) {
+                return true
+            }
         }
+
         return false
     }
 

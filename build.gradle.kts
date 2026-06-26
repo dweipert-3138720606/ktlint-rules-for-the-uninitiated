@@ -53,6 +53,9 @@ publishing {
 val ktlintCheck by tasks.registering(JavaExec::class) {
     dependsOn(tasks.classes)
     group = LifecycleBasePlugin.VERIFICATION_GROUP
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
     mainClass = "com.pinterest.ktlint.Main"
     classpath(ktlint, sourceSets.main.map { it.output })
     args("--log-level=debug", "src/**/*.kt")

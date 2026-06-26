@@ -11,7 +11,9 @@ class SecondaryConstructorRuleTest {
         KtLintAssertThat
             .assertThatRuleBuilder({ SecondaryConstructorRule() })
             .withEditorConfigOverride(
-                RuleId("uninitiated:no-primary-constructor").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to RuleExecution.enabled,
+                RuleId("uninitiated:no-primary-constructor")
+                    .createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to
+                    RuleExecution.enabled,
             ).assertThat()
 
     @Test
@@ -58,7 +60,9 @@ class SecondaryConstructorRuleTest {
             KtLintAssertThat
                 .assertThatRuleBuilder({ SecondaryConstructorRule() })
                 .withEditorConfigOverride(
-                    RuleId("uninitiated:no-primary-constructor").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to RuleExecution.enabled,
+                    RuleId("uninitiated:no-primary-constructor")
+                        .createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to
+                        RuleExecution.enabled,
                     SKIP_ENUMS_PROPERTY to false,
                 ).assertThat()
         assertWithEnums("enum class Color(val rgb: Int) { RED(0xFF) }")
