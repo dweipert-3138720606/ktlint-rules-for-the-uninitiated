@@ -2,20 +2,23 @@ package net.minecraft_community.ktlint.rules
 
 import com.pinterest.ktlint.rule.engine.core.api.Rule
 import com.pinterest.ktlint.rule.engine.core.api.RuleId
+import org.jetbrains.kotlin.com.intellij.lang.ASTNode
+import org.jetbrains.kotlin.psi.KtCallExpression
 
-/**
- * TODO: Enforce parentheses before trailing lambda.
- *
- * When the last argument of a function is a lambda, Kotlin allows omitting the parentheses
- * and placing the lambda outside. This rule should require keeping the parentheses.
- *
- *   // Wrong
- *   list.count { it > 0 }
- *
- *   // Correct
- *   list.count({ it > 0 })
- */
 class ParenthesesBeforeTrailingLambdaRule : Rule(
-    ruleId = RuleId("libmcui-style:parentheses-before-trailing-lambda"),
-    about = About(),
-)
+    ruleId = RuleId("uninitiated:parentheses-before-trailing-lambda"),
+    about = Rule.About(),
+), Rule.OnlyWhenEnabledInEditorconfig {
+    override fun beforeVisitChildNodes(
+        node: ASTNode,
+        autoCorrect: Boolean,
+        emit: (offset: Int, errorMessage: String, canAutoCorrect: Boolean) -> Unit,
+    ) {
+        if (node.psi is KtCallExpression) {
+            val call = node.psi as KtCallExpression
+            if (call.valueArgumentList == null && call.lambdaArguments.isNotEmpty()) {
+                emit(node.startOffset, "Parentheses are required before trailing lambda", false)
+            }
+        }
+    }
+}

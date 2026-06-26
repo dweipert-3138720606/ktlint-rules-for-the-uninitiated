@@ -2,32 +2,29 @@ package net.minecraft_community.ktlint.rules
 
 import com.pinterest.ktlint.rule.engine.core.api.Rule
 import com.pinterest.ktlint.rule.engine.core.api.RuleId
+import org.jetbrains.kotlin.com.intellij.lang.ASTNode
+import org.jetbrains.kotlin.psi.KtBlockExpression
+import org.jetbrains.kotlin.psi.KtReturnExpression
 
-/**
- * TODO: Require a blank line before the last return statement when the function body
- * has more than one statement.
- *
- *   // Wrong
- *   fun example(value: Int): String {
- *       val result = doSomething(value)
- *       val transformed = transform(result)
- *       return transformed
- *   }
- *
- *   // Correct
- *   fun example(value: Int): String {
- *       val result = doSomething(value)
- *       val transformed = transform(result)
- *
- *       return transformed
- *   }
- *
- *   // Also fine (single statement, no blank line needed)
- *   fun simple(value: Int): String {
- *       return value.toString()
- *   }
- */
 class BlankLineBeforeReturnRule : Rule(
-    ruleId = RuleId("libmcui-style:blank-line-before-return"),
-    about = About(),
-)
+    ruleId = RuleId("uninitiated:blank-line-before-return"),
+    about = Rule.About(),
+), Rule.OnlyWhenEnabledInEditorconfig {
+    override fun beforeVisitChildNodes(
+        node: ASTNode,
+        autoCorrect: Boolean,
+        emit: (offset: Int, errorMessage: String, canAutoCorrect: Boolean) -> Unit,
+    ) {
+        if (node.psi is KtBlockExpression) {
+            val block = node.psi as KtBlockExpression
+            val statements = block.statements
+            if (statements.size > 1 && statements.last() is KtReturnExpression) {
+                val returnNode = statements.last().node
+                val prevSibling = returnNode.treePrev
+                if (prevSibling == null || !prevSibling.text.contains("\n\n")) {
+                    emit(returnNode.startOffset, "Add a blank line before the return statement", false)
+                }
+            }
+        }
+    }
+}
