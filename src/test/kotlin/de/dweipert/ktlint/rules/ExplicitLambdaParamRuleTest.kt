@@ -11,8 +11,10 @@ class ExplicitLambdaParamRuleTest {
         KtLintAssertThat
             .assertThatRuleBuilder({ ExplicitLambdaParamRule() })
             .withEditorConfigOverride(
-                RuleId("uninitiated:explicit-lambda-param").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to
+                Pair(
+                    RuleId("uninitiated:explicit-lambda-param").createRuleExecutionEditorConfigProperty(RuleExecution.enabled),
                     RuleExecution.enabled,
+                ),
             ).assertThat()
 
     @Test

@@ -11,8 +11,10 @@ class BlankLineBeforeReturnRuleTest {
         KtLintAssertThat
             .assertThatRuleBuilder({ BlankLineBeforeReturnRule() })
             .withEditorConfigOverride(
-                RuleId("uninitiated:blank-line-before-return").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to
+                Pair(
+                    RuleId("uninitiated:blank-line-before-return").createRuleExecutionEditorConfigProperty(RuleExecution.enabled),
                     RuleExecution.enabled,
+                ),
             ).assertThat()
 
     @Test

@@ -12,7 +12,10 @@ class IfMultilineRuleTest {
         KtLintAssertThat
             .assertThatRuleBuilder({ IfMultilineRule() })
             .withEditorConfigOverride(
-                RuleId("uninitiated:if-multiline").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to RuleExecution.enabled,
+                Pair(
+                    RuleId("uninitiated:if-multiline").createRuleExecutionEditorConfigProperty(RuleExecution.enabled),
+                    RuleExecution.enabled,
+                ),
             ).assertThat()
 
     @Test

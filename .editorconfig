@@ -5,3 +5,5 @@ ktlint_uninitiated_if-brace = enabled
 ktlint_uninitiated_if-multiline = enabled
 ktlint_uninitiated_blank-line-before-return = enabled
 ktlint_uninitiated_variable-name-length = enabled
+ktlint_uninitiated_no-primary-constructor = enabled
+ktlint_uninitiated_no-to = enabled

@@ -11,8 +11,10 @@ class ParenthesesBeforeTrailingLambdaRuleTest {
         KtLintAssertThat
             .assertThatRuleBuilder({ ParenthesesBeforeTrailingLambdaRule() })
             .withEditorConfigOverride(
-                RuleId("uninitiated:parentheses-before-trailing-lambda").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to
+                Pair(
+                    RuleId("uninitiated:parentheses-before-trailing-lambda").createRuleExecutionEditorConfigProperty(RuleExecution.enabled),
                     RuleExecution.enabled,
+                ),
             ).assertThat()
 
     @Test

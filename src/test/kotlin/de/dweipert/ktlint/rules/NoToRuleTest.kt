@@ -11,9 +11,11 @@ class NoToRuleTest {
         KtLintAssertThat
             .assertThatRuleBuilder({ NoToRule() })
             .withEditorConfigOverride(
-                RuleId("uninitiated:no-to")
-                    .createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to
+                Pair(
+                    RuleId("uninitiated:no-to")
+                        .createRuleExecutionEditorConfigProperty(RuleExecution.enabled),
                     RuleExecution.enabled,
+                ),
             ).assertThat()
 
     @Test

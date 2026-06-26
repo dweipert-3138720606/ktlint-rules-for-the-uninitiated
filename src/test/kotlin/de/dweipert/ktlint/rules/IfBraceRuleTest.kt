@@ -11,7 +11,7 @@ class IfBraceRuleTest {
         KtLintAssertThat
             .assertThatRuleBuilder({ IfBraceRule() })
             .withEditorConfigOverride(
-                RuleId("uninitiated:if-brace").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to RuleExecution.enabled,
+                Pair(RuleId("uninitiated:if-brace").createRuleExecutionEditorConfigProperty(RuleExecution.enabled), RuleExecution.enabled),
             ).assertThat()
 
     @Test
