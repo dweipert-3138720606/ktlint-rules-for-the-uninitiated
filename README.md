@@ -20,6 +20,7 @@ ktlint_uninitiated_explicit-lambda-param = enabled
 - [4. `if-multiline`](#4-if-multiline)
 - [5. `blank-line-before-return`](#5-blank-line-before-return)
 - [6. `variable-name-length`](#6-variable-name-length)
+- [7. `no-primary-constructor`](#7-no-primary-constructor)
 
 ---
 
@@ -174,4 +175,50 @@ Example `.editorconfig`:
 ```ini
 ktlint_uninitiated_min_variable_name_length = 5
 ktlint_uninitiated_min_variable_name_skip_names = _, it, id, x, y
+```
+
+---
+
+### 7. `no-primary-constructor`
+
+Disallow primary constructors with parameters. Require the use of secondary constructors instead.
+
+```kotlin
+// Wrong
+class Person(val name: String, val age: Int)
+
+// Correct
+class Person {
+    val name: String
+    val age: Int
+
+    constructor(name: String, age: Int) {
+        this.name = name
+        this.age = age
+    }
+}
+```
+
+The following class types are always skipped:
+- Data classes (require primary constructor parameters by language design)
+- Value/inline classes (`@JvmInline value class`)
+- Annotation classes (`annotation class`)
+
+Classes are also skipped when an `init` block references a `val`/`var` primary
+constructor property — rewriting to a secondary constructor would break the
+code because `init` blocks run before the constructor body, and the property
+would not yet be initialized.
+
+Enum classes are skipped by default but can be opted in:
+
+#### Configurable properties
+
+| Property | Default | Description |
+|---|---|---|
+| `ktlint_uninitiated_no_primary_constructor_skip_enums` | `true` | Skip enum classes |
+
+Example `.editorconfig` to also flag enums:
+
+```ini
+ktlint_uninitiated_no_primary_constructor_skip_enums = false
 ```

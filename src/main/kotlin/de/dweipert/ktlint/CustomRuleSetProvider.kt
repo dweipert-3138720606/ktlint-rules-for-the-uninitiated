@@ -8,6 +8,7 @@ import de.dweipert.ktlint.rules.ExplicitLambdaParamRule
 import de.dweipert.ktlint.rules.IfBraceRule
 import de.dweipert.ktlint.rules.IfMultilineRule
 import de.dweipert.ktlint.rules.ParenthesesBeforeTrailingLambdaRule
+import de.dweipert.ktlint.rules.SecondaryConstructorRule
 import de.dweipert.ktlint.rules.VariableNameLengthRule
 
 class CustomRuleSetProvider : RuleSetProviderV3(RuleSetId("uninitiated")) {
@@ -18,6 +19,7 @@ class CustomRuleSetProvider : RuleSetProviderV3(RuleSetId("uninitiated")) {
             RuleProvider({ IfMultilineRule() }),
             RuleProvider({ ParenthesesBeforeTrailingLambdaRule() }),
             RuleProvider({ BlankLineBeforeReturnRule() }),
+            RuleProvider({ SecondaryConstructorRule() }),
             RuleProvider({ VariableNameLengthRule() }),
         )
 }
