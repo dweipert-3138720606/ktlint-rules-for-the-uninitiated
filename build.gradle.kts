@@ -1,30 +1,63 @@
 plugins {
     kotlin("jvm") version "2.1.0"
+    `maven-publish`
 }
 
 group = "de.dweipert"
 version = "1.0.0-SNAPSHOT"
 
-repositories {
-    mavenCentral()
-}
-
-kotlin {
-    jvmToolchain(17)
-}
+val ktlint: Configuration by configurations.creating
 
 dependencies {
-    compileOnly("com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0")
-    compileOnly("com.pinterest.ktlint:ktlint-cli-ruleset-core:1.8.0")
+    ktlint("com.pinterest.ktlint:ktlint-cli:1.8.0")
 
-    testImplementation("com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0")
+    implementation("com.pinterest.ktlint:ktlint-cli-ruleset-core:1.8.0")
+    implementation("com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0")
+
+    testImplementation("org.junit.jupiter:junit-jupiter:6.1.0")
+    testImplementation("org.junit.platform:junit-platform-launcher:6.1.0")
+    testImplementation("org.slf4j:slf4j-simple:2.0.18")
     testImplementation("com.pinterest.ktlint:ktlint-test:1.8.0")
-    testImplementation(platform("org.junit:junit-bom:5.11.4"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testRuntimeOnly("ch.qos.logback:logback-classic:1.5.16")
 }
 
 tasks.test {
     useJUnitPlatform()
+}
+
+kotlin {
+    jvmToolchain(21)
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            pom {
+                licenses {
+                    license {
+                        name = "MIT License"
+                        url = "https://opensource.org/licenses/MIT"
+                        distribution = "repo"
+                    }
+                }
+            }
+        }
+    }
+}
+
+val ktlintCheck by tasks.registering(JavaExec::class) {
+    dependsOn(tasks.classes)
+    group = LifecycleBasePlugin.VERIFICATION_GROUP
+    mainClass = "com.pinterest.ktlint.Main"
+    classpath(ktlint, sourceSets.main.map { it.output })
+    args("--log-level=debug", "src/**/*.kt")
+}
+
+tasks.check {
+    dependsOn(ktlintCheck)
 }
