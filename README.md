@@ -1,6 +1,10 @@
 # ktlint rules for the uninitiated
 
-Custom ktlint rule set `uninitiated`. Add the JAR as a `--ruleset` when running ktlint:
+This is a custom ktlint rule set for the `uninitiated`. (people not used to kotlin's unique syntax in some places)  
+These are highly opinionated rules.  
+All of them are disabled by default, so you can choose what to enable.
+
+Add the JAR as a `--ruleset` when running ktlint:
 
 ```bash
 ktlint --ruleset=ktlint-rules-for-the-uninitiated.jar "src/**/*.kt"

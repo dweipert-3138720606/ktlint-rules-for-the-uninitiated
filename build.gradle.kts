@@ -58,7 +58,8 @@ val ktlintCheck by tasks.registering(JavaExec::class) {
     }
     mainClass = "com.pinterest.ktlint.Main"
     classpath(ktlint, sourceSets.main.map { it.output })
-    args("--log-level=debug", "src/**/*.kt")
+    args("src/**/*.kt")
+    jvmArgs("--add-opens", "java.base/java.lang=ALL-UNNAMED")
 }
 
 tasks.check {

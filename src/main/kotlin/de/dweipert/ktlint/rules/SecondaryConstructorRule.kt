@@ -55,6 +55,7 @@ class SecondaryConstructorRule :
         skipEnums = editorConfig.get(SKIP_ENUMS_PROPERTY)
     }
 
+    @Suppress("OVERRIDE_DEPRECATION")
     override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,

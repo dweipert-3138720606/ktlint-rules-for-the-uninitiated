@@ -90,6 +90,7 @@ class VariableNameLengthRule :
                 .toSet()
     }
 
+    @Suppress("OVERRIDE_DEPRECATION")
     override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,

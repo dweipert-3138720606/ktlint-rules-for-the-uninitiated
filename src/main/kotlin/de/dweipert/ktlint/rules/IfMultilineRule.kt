@@ -16,6 +16,7 @@ class IfMultilineRule :
         about = Rule.About(),
     ),
     Rule.OnlyWhenEnabledInEditorconfig {
+    @Suppress("OVERRIDE_DEPRECATION")
     override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,
