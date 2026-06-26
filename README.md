@@ -21,6 +21,7 @@ ktlint_uninitiated_explicit-lambda-param = enabled
 - [5. `blank-line-before-return`](#5-blank-line-before-return)
 - [6. `variable-name-length`](#6-variable-name-length)
 - [7. `no-primary-constructor`](#7-no-primary-constructor)
+- [8. `no-to`](#8-no-to)
 
 ---
 
@@ -221,4 +222,23 @@ Example `.editorconfig` to also flag enums:
 
 ```ini
 ktlint_uninitiated_no_primary_constructor_skip_enums = false
+```
+
+---
+
+### 8. `no-to`
+
+Disallow the `to` infix function. Use explicit `Pair` instead.
+
+```kotlin
+// Wrong
+"a" to 1
+mapOf("a" to 1)
+
+// Correct
+Pair("a", 1)
+mapOf(Pair("a", 1))
+```
+
+Not configurable — all uses of the `to` infix operator are flagged.
 ```
