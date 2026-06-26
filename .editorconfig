@@ -1,0 +1,8 @@
+[*]
+ktlint_standard_package-name = disabled
+ktlint_uninitiated_explicit-lambda-param = enabled
+ktlint_uninitiated_parentheses-before-trailing-lambda = enabled
+ktlint_uninitiated_if-brace = enabled
+ktlint_uninitiated_if-multiline = enabled
+ktlint_uninitiated_blank-line-before-return = enabled
+ktlint_uninitiated_variable-name-length = enabled

@@ -7,11 +7,13 @@ import com.pinterest.ktlint.test.KtLintAssertThat
 import org.junit.jupiter.api.Test
 
 class ExplicitLambdaParamRuleTest {
-    private val assertThat = KtLintAssertThat.assertThatRuleBuilder { ExplicitLambdaParamRule() }
-        .withEditorConfigOverride(
-            RuleId("uninitiated:explicit-lambda-param").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to RuleExecution.enabled,
-        )
-        .assertThat()
+    private val assertThat =
+        KtLintAssertThat
+            .assertThatRuleBuilder({ ExplicitLambdaParamRule() })
+            .withEditorConfigOverride(
+                RuleId("uninitiated:explicit-lambda-param").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to
+                    RuleExecution.enabled,
+            ).assertThat()
 
     @Test
     fun `should flag implicit it`() {
@@ -26,8 +28,8 @@ class ExplicitLambdaParamRuleTest {
     }
 
     @Test
-    fun `should flag lambda with no parameters`() {
+    fun `should not flag lambda with no parameters and no it reference`() {
         assertThat("fun f() { val f = { 42 } }")
-            .hasLintViolationWithoutAutoCorrect(1, 19, "Lambda must have explicit parameter names instead of implicit 'it'")
+            .hasNoLintViolations()
     }
 }

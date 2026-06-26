@@ -8,11 +8,13 @@ import com.pinterest.ktlint.test.LintViolation
 import org.junit.jupiter.api.Test
 
 class VariableNameLengthRuleTest {
-    private val assertThat = KtLintAssertThat.assertThatRuleBuilder { VariableNameLengthRule() }
-        .withEditorConfigOverride(
-            RuleId("uninitiated:variable-name-length").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to RuleExecution.enabled,
-        )
-        .assertThat()
+    private val assertThat =
+        KtLintAssertThat
+            .assertThatRuleBuilder({ VariableNameLengthRule() })
+            .withEditorConfigOverride(
+                RuleId("uninitiated:variable-name-length").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to
+                    RuleExecution.enabled,
+            ).assertThat()
 
     @Test
     fun `should flag short local variable`() {

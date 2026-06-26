@@ -6,10 +6,12 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.psi.KtBlockExpression
 import org.jetbrains.kotlin.psi.KtReturnExpression
 
-class BlankLineBeforeReturnRule : Rule(
-    ruleId = RuleId("uninitiated:blank-line-before-return"),
-    about = Rule.About(),
-), Rule.OnlyWhenEnabledInEditorconfig {
+class BlankLineBeforeReturnRule :
+    Rule(
+        ruleId = RuleId("uninitiated:blank-line-before-return"),
+        about = Rule.About(),
+    ),
+    Rule.OnlyWhenEnabledInEditorconfig {
     override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,

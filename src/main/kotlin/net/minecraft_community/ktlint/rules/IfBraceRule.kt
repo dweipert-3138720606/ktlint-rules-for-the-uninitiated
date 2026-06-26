@@ -6,10 +6,12 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.psi.KtBlockExpression
 import org.jetbrains.kotlin.psi.KtIfExpression
 
-class IfBraceRule : Rule(
-    ruleId = RuleId("uninitiated:if-brace"),
-    about = Rule.About(),
-), Rule.OnlyWhenEnabledInEditorconfig {
+class IfBraceRule :
+    Rule(
+        ruleId = RuleId("uninitiated:if-brace"),
+        about = Rule.About(),
+    ),
+    Rule.OnlyWhenEnabledInEditorconfig {
     override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,

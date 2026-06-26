@@ -7,11 +7,13 @@ import com.pinterest.ktlint.test.KtLintAssertThat
 import org.junit.jupiter.api.Test
 
 class ParenthesesBeforeTrailingLambdaRuleTest {
-    private val assertThat = KtLintAssertThat.assertThatRuleBuilder { ParenthesesBeforeTrailingLambdaRule() }
-        .withEditorConfigOverride(
-            RuleId("uninitiated:parentheses-before-trailing-lambda").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to RuleExecution.enabled,
-        )
-        .assertThat()
+    private val assertThat =
+        KtLintAssertThat
+            .assertThatRuleBuilder({ ParenthesesBeforeTrailingLambdaRule() })
+            .withEditorConfigOverride(
+                RuleId("uninitiated:parentheses-before-trailing-lambda").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to
+                    RuleExecution.enabled,
+            ).assertThat()
 
     @Test
     fun `should flag trailing lambda without parentheses`() {

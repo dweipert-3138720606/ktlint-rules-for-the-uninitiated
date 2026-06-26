@@ -11,12 +11,13 @@ import net.minecraft_community.ktlint.rules.ParenthesesBeforeTrailingLambdaRule
 import net.minecraft_community.ktlint.rules.VariableNameLengthRule
 
 class CustomRuleSetProvider : RuleSetProviderV3(RuleSetId("uninitiated")) {
-    override fun getRuleProviders(): Set<RuleProvider> = setOf(
-        RuleProvider { ExplicitLambdaParamRule() },
-        RuleProvider { ParenthesesBeforeTrailingLambdaRule() },
-        RuleProvider { IfBraceRule() },
-        RuleProvider { IfMultilineRule() },
-        RuleProvider { BlankLineBeforeReturnRule() },
-        RuleProvider { VariableNameLengthRule() },
-    )
+    override fun getRuleProviders(): Set<RuleProvider> =
+        setOf(
+            RuleProvider({ ExplicitLambdaParamRule() }),
+            RuleProvider({ ParenthesesBeforeTrailingLambdaRule() }),
+            RuleProvider({ IfBraceRule() }),
+            RuleProvider({ IfMultilineRule() }),
+            RuleProvider({ BlankLineBeforeReturnRule() }),
+            RuleProvider({ VariableNameLengthRule() }),
+        )
 }

@@ -5,10 +5,12 @@ import com.pinterest.ktlint.rule.engine.core.api.RuleId
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.psi.KtCallExpression
 
-class ParenthesesBeforeTrailingLambdaRule : Rule(
-    ruleId = RuleId("uninitiated:parentheses-before-trailing-lambda"),
-    about = Rule.About(),
-), Rule.OnlyWhenEnabledInEditorconfig {
+class ParenthesesBeforeTrailingLambdaRule :
+    Rule(
+        ruleId = RuleId("uninitiated:parentheses-before-trailing-lambda"),
+        about = Rule.About(),
+    ),
+    Rule.OnlyWhenEnabledInEditorconfig {
     override fun beforeVisitChildNodes(
         node: ASTNode,
         autoCorrect: Boolean,

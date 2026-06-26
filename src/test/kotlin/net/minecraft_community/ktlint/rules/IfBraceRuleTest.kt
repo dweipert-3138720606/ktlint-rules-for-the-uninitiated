@@ -7,11 +7,12 @@ import com.pinterest.ktlint.test.KtLintAssertThat
 import org.junit.jupiter.api.Test
 
 class IfBraceRuleTest {
-    private val assertThat = KtLintAssertThat.assertThatRuleBuilder { IfBraceRule() }
-        .withEditorConfigOverride(
-            RuleId("uninitiated:if-brace").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to RuleExecution.enabled,
-        )
-        .assertThat()
+    private val assertThat =
+        KtLintAssertThat
+            .assertThatRuleBuilder({ IfBraceRule() })
+            .withEditorConfigOverride(
+                RuleId("uninitiated:if-brace").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to RuleExecution.enabled,
+            ).assertThat()
 
     @Test
     fun `should flag if without braces`() {

@@ -8,11 +8,12 @@ import com.pinterest.ktlint.test.LintViolation
 import org.junit.jupiter.api.Test
 
 class IfMultilineRuleTest {
-    private val assertThat = KtLintAssertThat.assertThatRuleBuilder { IfMultilineRule() }
-        .withEditorConfigOverride(
-            RuleId("uninitiated:if-multiline").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to RuleExecution.enabled,
-        )
-        .assertThat()
+    private val assertThat =
+        KtLintAssertThat
+            .assertThatRuleBuilder({ IfMultilineRule() })
+            .withEditorConfigOverride(
+                RuleId("uninitiated:if-multiline").createRuleExecutionEditorConfigProperty(RuleExecution.enabled) to RuleExecution.enabled,
+            ).assertThat()
 
     @Test
     fun `should flag single-line if without braces`() {
@@ -28,13 +29,14 @@ class IfMultilineRuleTest {
 
     @Test
     fun `should not flag multiline if with braces`() {
-        val code = """
+        val code =
+            """
             fun f() {
                 if (bool) {
                     doThing()
                 }
             }
-        """.trimIndent()
+            """.trimIndent()
         assertThat(code)
             .hasNoLintViolations()
     }
@@ -47,7 +49,8 @@ class IfMultilineRuleTest {
 
     @Test
     fun `should not flag multiline if-else with braces`() {
-        val code = """
+        val code =
+            """
             fun f() {
                 if (x) {
                     a()
@@ -55,7 +58,7 @@ class IfMultilineRuleTest {
                     b()
                 }
             }
-        """.trimIndent()
+            """.trimIndent()
         assertThat(code)
             .hasNoLintViolations()
     }
@@ -63,7 +66,7 @@ class IfMultilineRuleTest {
     @Test
     fun `should flag single-line else-if with braces`() {
         assertThat("fun f() { if (x) { a() } else if (y) { b() } }")
-            .hasLintViolationsWithoutAutoCorrect(
+            .hasLintViolations(
                 LintViolation(1, 11, "If statement must be multiline", false),
                 LintViolation(1, 31, "If statement must be multiline", false),
             )
@@ -71,7 +74,8 @@ class IfMultilineRuleTest {
 
     @Test
     fun `should not flag multiline else-if with braces`() {
-        val code = """
+        val code =
+            """
             fun f() {
                 if (x) {
                     a()
@@ -79,7 +83,7 @@ class IfMultilineRuleTest {
                     b()
                 }
             }
-        """.trimIndent()
+            """.trimIndent()
         assertThat(code)
             .hasNoLintViolations()
     }
